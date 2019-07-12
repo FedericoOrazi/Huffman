@@ -11,7 +11,7 @@ public class BinaryHeap {
 		this.buildMaxHeap(A);
 	}
 	
-	/* Dato un array crea uno heap */
+	// Dato un array crea uno heap
 	public void buildMaxHeap(int[] A) {
 		for(int i=A.length-1;i>=0;i--)
 			maxHeapify(A,i,A.length);
@@ -23,22 +23,12 @@ public class BinaryHeap {
 		A[j] = temp;
 	}
 	
-	/*public void sort(int[] A) {
-		buildMaxHeap(A);
-		int heapSize = A.length;
-		for(int i=A.length-1;i>=1;i--){
-		scambia(A,0,i);
-		heapSize--;
-		maxHeapify(A,0,heapSize);
-		}
-	}*/
-	
-	/* restituisce il padre del nodo */
+	// restituisce il padre del nodo
 	public int Parent(int i) {
 		return i/2;
 	};
 
-	/* restituisce il figlio sinistro del nodo */
+	// restituisce il figlio sinistro del nodo 
 	public int Left(int i) {
 		return 2*i;
 	};

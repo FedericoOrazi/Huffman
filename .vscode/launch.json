@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MyComparator",
+            "request": "launch",
+            "mainClass": "MyComparator"
+        }
+    ]
+}
