@@ -4,7 +4,7 @@ public class BinaryHeap {
 
     public BinaryHeap(){
         this.elements = new Node[10];
-        this.heapSize=0;
+        this.heapSize= -1; //heap vuoto
     }
 
     public int parent(int index){
@@ -16,23 +16,49 @@ public class BinaryHeap {
     public int right(int index){
         return 2*index + 1;
     }
-    public int search(int key){
-        return null;
+    public Node minimum(){
+        if(this.heapSize<0)
+            return null;
+        else
+            return this.elements[0];
+    }
+    public void maxHeapify(int key){
+        int l=left(key);
+        int r=right(key);
+        int max = key;
+        if(l <= this.heapSize && this.elements[l].getKey() > this.elements[i].getKey())
+            max = l;
+        if(r <= this.heapSize && this.elements[r].getKey() > this.elements[max].getKey())
+            max = r;
+        if (max != key) {
+            scambiaNodo(this.elements[key], this.elements[max]);
+            maxHeapify(max);
+        }
     }
     public void insert(Node nodo){
         if (this.heapSize + 1 >= this.elements.length) {
             growthStrategy();
         }
         this.heapSize ++;
-        this.elements[this.heapSize] = nodo; 
+        this.elements[this.heapSize] = nodo;
+        
         int i = this.heapSize;
-        while (i>1 && elements[parent(i)].getKey() > elements[i].getKey()) {
-            Nodo inter = new Nodo();
-            inter = elements[i];
-            elements[i] = elements[parent(i)];
-            elements[parent(i)]= inter;
+
+        while (i>0 && this.elements[parent(i)].getKey() > this.elements[i].getKey()) {
+            scambiaNodo(this.elements[i], this.elements[parent(i)]);
             i = parent(i);
         }       
+    }
+    public void decreaseKey(int i, int key){
+        if( key > this.elements[i].getKey())
+            System.out.println("Chiave più grande della precedente");
+        else{
+            this.elements[i].setKey(key);
+            while (i > 0 && this.elements[parent(i)].getKey() > this.elements[i].getKey()) {
+                scambiaNodo(this.elements[parent(i)], this.elements[i]);
+                i = parent(i);
+            }
+        }
     }
     public Node getNodeAt(int index){
         if (index >= this.elements.length) {
@@ -42,8 +68,15 @@ public class BinaryHeap {
             return elements[index];
         }
     }
-    
-    public boolean delete()
+    public void delete(int key){
+        this.elements[key] = this.elements[this.heapSize];
+        this.heapSize --;
+        while (key > 0 && this.elements[parent(key)].getKey() > this.elements[key].getKey()) {
+            scambiaNodo(this.elements[parent(key)], this.elements[key]);
+            key = parent(key);
+        }
+        maxHeapify(key);
+    }
     private void growthStrategy(){
         Node[] newArray = new Node[this.elements.length*2];
         for (int i = 0; i < this.elements.length; i++) {
@@ -51,5 +84,11 @@ public class BinaryHeap {
         }
         this.elements = newArray;
         this.heapSize = this.elements.length;
+    }
+    private void scambiaNodo(Node a, Node b){
+        Nodo inter = new Nodo();
+        inter = a;
+        a = b;
+        b= inter;
     }
 }
