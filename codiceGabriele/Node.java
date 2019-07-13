@@ -1,3 +1,5 @@
+package Huffman;
+
 public class Node {
     private char lettera;
     private int key;

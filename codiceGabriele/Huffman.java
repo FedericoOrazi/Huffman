@@ -1,4 +1,6 @@
-public static class Huffman {
+package Huffman;
+
+public class Huffman {
 
     
 }

@@ -1,3 +1,5 @@
+package Huffman;
+
 public interface IBinaryHeap {
 
     public int parent(int index);

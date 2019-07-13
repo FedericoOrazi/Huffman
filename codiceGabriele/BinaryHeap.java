@@ -1,4 +1,6 @@
-public class BinaryHeap implements IBinaryHeap{
+package Huffman;
+
+public class BinaryHeap implements IBinaryHeap {
     private Node[] elements;
     private int heapSize;
 
@@ -26,7 +28,7 @@ public class BinaryHeap implements IBinaryHeap{
         int l=left(key);
         int r=right(key);
         int max = key;
-        if(l <= this.heapSize && this.elements[l].getKey() > this.elements[i].getKey())
+        if(l <= this.heapSize && this.elements[l].getKey() > this.elements[key].getKey())
             max = l;
         if(r <= this.heapSize && this.elements[r].getKey() > this.elements[max].getKey())
             max = r;
