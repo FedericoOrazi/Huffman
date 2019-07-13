@@ -3,10 +3,15 @@ package Huffman;
 public class BinaryHeap implements IBinaryHeap {
     private Node[] elements;
     private int heapSize;
+    private static BinaryHeap instance = null;
 
-    public BinaryHeap(){
+    private BinaryHeap(){
         this.elements = new Node[10];
         this.heapSize= -1; //heap vuoto
+    }
+    public static BinaryHeap getInstance(){
+        if(instance == null)instance = new BinaryHeap();
+        return instance;
     }
 
     public int parent(int index){
@@ -18,23 +23,23 @@ public class BinaryHeap implements IBinaryHeap {
     public int right(int index){
         return 2*index + 1;
     }
-    public Node maximum(){
+    public Node minimum(){
         if(this.heapSize<0)
             return null;
         else
             return this.elements[0];
     }
-    public void maxHeapify(int key){
+    public void minHeapify(int key){
         int l=left(key);
         int r=right(key);
-        int max = key;
-        if(l <= this.heapSize && this.elements[l].getKey() > this.elements[key].getKey())
-            max = l;
-        if(r <= this.heapSize && this.elements[r].getKey() > this.elements[max].getKey())
-            max = r;
-        if (max != key) {
-            scambiaNodo(this.elements[key], this.elements[max]);
-            maxHeapify(max);
+        int min = key;
+        if(l <= this.heapSize && this.elements[l].getKey() < this.elements[key].getKey())
+            min = l;
+        if(r <= this.heapSize && this.elements[r].getKey() < this.elements[min].getKey())
+            min = r;
+        if (min != key) {
+            scambiaNodo(this.elements[key], this.elements[min]);
+            minHeapify(min);
         }
     }
     public void insert(Node nodo){
@@ -46,7 +51,7 @@ public class BinaryHeap implements IBinaryHeap {
         
         int i = this.heapSize;
 
-        while (i>0 && this.elements[parent(i)].getKey() > this.elements[i].getKey()) {
+        while (i>0 && this.elements[parent(i)].getKey() < this.elements[i].getKey()) {
             scambiaNodo(this.elements[i], this.elements[parent(i)]);
             i = parent(i);
         }       
@@ -56,7 +61,7 @@ public class BinaryHeap implements IBinaryHeap {
             System.out.println("Chiave più grande della precedente");
         else{
             this.elements[i].setKey(key);
-            while (i > 0 && this.elements[parent(i)].getKey() > this.elements[i].getKey()) {
+            while (i > 0 && this.elements[parent(i)].getKey() < this.elements[i].getKey()) {
                 scambiaNodo(this.elements[parent(i)], this.elements[i]);
                 i = parent(i);
             }
@@ -73,22 +78,25 @@ public class BinaryHeap implements IBinaryHeap {
     public void delete(int key){
         this.elements[key] = this.elements[this.heapSize];
         this.heapSize --;
-        while (key > 0 && this.elements[parent(key)].getKey() > this.elements[key].getKey()) {
+        while (key > 0 && this.elements[parent(key)].getKey() < this.elements[key].getKey()) {
             scambiaNodo(this.elements[parent(key)], this.elements[key]);
             key = parent(key);
         }
-        maxHeapify(key);
+        minHeapify(key);
     }
-    public Node extractMax(){
+    public Node extractMin(){
         if(this.heapSize < 0){
             System.out.println("Coda vuota");
             return null;
         }
-        Node max = this.elements[0];
+        Node min = this.elements[0];
         this.elements[0] = this.elements[this.heapSize];
         this.heapSize --;
-        maxHeapify(0);
-        return max;
+        minHeapify(0);
+        return min;
+    }
+    public void destroyHeap(){
+        instance = null;
     }
     private void growthStrategy(){
         Node[] newArray = new Node[this.elements.length*2];

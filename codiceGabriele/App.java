@@ -18,7 +18,7 @@ public final class App {
         for (int i = 0; i < x.length ; i++) {
             if(x[i] != 0){
                 System.out.print((char)i);
-                System.out.print(" --> ");
+                System.out.print(" -->");
                 System.out.println(x[i]);
             }
         }
