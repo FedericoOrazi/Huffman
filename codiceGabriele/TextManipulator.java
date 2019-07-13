@@ -16,7 +16,17 @@ public class TextManipulator {
         if(instance == null)instance = new TextManipulator();
         return instance;
     }
-
+    public int[] frequenzaLettereTesto(){
+        int[] x = new int[65536];
+        for (int i = 0; i < 65536; i++) {
+            x[i]=0;
+        }
+        String str = TextManipulator.getInstance().readText();
+        for (int i = 0; i < str.length(); i++) {
+            x[(int)str.charAt(i)]++;
+        }
+        return x;
+    }
     public String readText(){
         try {
             FileInputStream in = new FileInputStream(getFileFullPath());
@@ -27,7 +37,6 @@ public class TextManipulator {
                 sb.append(line);
                 sb.append("\n");
             }
-            System.out.println(sb.toString());
             br.close();
             return sb.toString();
         } catch (Exception e) {
