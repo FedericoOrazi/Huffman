@@ -97,9 +97,9 @@ public class BinaryHeap implements IBinaryHeap{
         this.heapSize = this.elements.length;
     }
     private void scambiaNodo(Node a, Node b){
-        Nodo inter = new Nodo();
-        inter = a;
-        a = b;
-        b= inter;
+        int inter;
+        inter = a.getKey();
+        a.setKey(b.getKey());
+        b.setKey(inter);
     }
 }
