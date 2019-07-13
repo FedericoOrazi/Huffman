@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Tesina",
+            "request": "launch",
+            "mainClass": "Tesina"
+        }
+    ]
+}

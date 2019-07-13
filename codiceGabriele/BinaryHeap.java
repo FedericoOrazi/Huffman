@@ -1,4 +1,4 @@
-public class BinaryHeap {
+public class BinaryHeap implements IBinaryHeap{
     private Node[] elements;
     private int heapSize;
 
@@ -16,7 +16,7 @@ public class BinaryHeap {
     public int right(int index){
         return 2*index + 1;
     }
-    public Node minimum(){
+    public Node maximum(){
         if(this.heapSize<0)
             return null;
         else
@@ -76,6 +76,17 @@ public class BinaryHeap {
             key = parent(key);
         }
         maxHeapify(key);
+    }
+    public Node extractMax(){
+        if(this.heapSize < 0){
+            System.out.println("Coda vuota");
+            return null;
+        }
+        Node max = this.elements[0];
+        this.elements[0] = this.elements[this.heapSize];
+        this.heapSize --;
+        maxHeapify(0);
+        return max;
     }
     private void growthStrategy(){
         Node[] newArray = new Node[this.elements.length*2];
