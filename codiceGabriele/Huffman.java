@@ -6,7 +6,7 @@ public abstract class Huffman {
         BinaryHeap.getInstance(); //crea un heap binario vuoto
         int n = 0;
         for (int i = 0; i < caratteri.length; i++) {
-            if (caratteri[i] != 0) {
+            if (caratteri[i] != 0 && i != 10) {
                 Node x = new Node();
                 x.setChar((char)i);
                 x.setKey(caratteri[i]);
@@ -26,5 +26,22 @@ public abstract class Huffman {
         
         
         return BinaryHeap.getInstance().extractMin();
+    }
+
+    public static void printHuffmanCode(Node root){
+        print(root,"");
+    }
+    private static void print(Node x, String h){
+        if(x.left() == null && x.right() == null){
+            System.out.print(x.getChar());
+            System.out.print("-->");
+            System.out.println(h);
+        }
+        if (x.left() != null) {
+            print(x.left(), h + "0");
+        }
+        if(x.right() != null) {
+            print(x.right(), h + "1"); 
+        }
     }
 }

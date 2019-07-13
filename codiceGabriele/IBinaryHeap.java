@@ -9,7 +9,6 @@ public interface IBinaryHeap {
     public void minHeapify(int key);
     public void insert(Node nodo);
     public void decreaseKey(int i, int key);
-    public Node getNodeAt(int index);
     public void delete(int key);
     public Node extractMin();
     public void destroyHeap();

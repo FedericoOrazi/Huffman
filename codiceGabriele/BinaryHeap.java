@@ -78,14 +78,6 @@ public class BinaryHeap implements IBinaryHeap {
             }
         }
     }
-    public Node getNodeAt(int index){
-        if (index >= this.elements.length) {
-            System.out.println("non esiste un nodo con tale indice");
-            return null;
-        } else {
-            return elements[index];
-        }
-    }
     public void delete(int key){
         this.elements[key] = this.elements[this.heapSize];
         this.heapSize --;

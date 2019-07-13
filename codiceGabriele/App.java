@@ -8,7 +8,7 @@ public final class App {
     }
 
     public static void main(String[] args) {
-        int x = Huffman.makeHuffmanHeap(TextManipulator.getInstance().frequenzaLettereTesto()).getKey();
-        System.out.println(x);
+        Node huffmanRoot = Huffman.makeHuffmanHeap(TextManipulator.getInstance().frequenzaLettereTesto());
+        Huffman.printHuffmanCode(huffmanRoot);
     }
 }
