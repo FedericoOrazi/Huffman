@@ -1,6 +1,7 @@
 package Huffman;
 
 public class BinaryHeap implements IBinaryHeap {
+    
     private Node[] elements;
     private int heapSize;
     private static BinaryHeap instance = null;
@@ -56,7 +57,6 @@ public class BinaryHeap implements IBinaryHeap {
         int i = this.heapSize;
 
         while (i>1 && this.elements[parent(i)].getKey() > this.elements[i].getKey()) {
-            //scambiaNodo(this.elements[i], this.elements[parent(i)]);
             Node inter = new Node();
             inter = this.elements[i];
             this.elements[i]= this.elements[parent(i)];
@@ -103,12 +103,6 @@ public class BinaryHeap implements IBinaryHeap {
     }
     public void destroyHeap(){
         instance = null;
-    }
-    public void print(){
-        for (int i = 1; i <= this.heapSize; i++) {
-            System.out.print(this.elements[i].getKey());
-            System.out.println(this.elements[i].getChar());
-        }
     }
     private void growthStrategy(){
         Node[] newArray = new Node[this.elements.length*2];

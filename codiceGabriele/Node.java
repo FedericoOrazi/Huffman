@@ -3,6 +3,7 @@ package Huffman;
 public class Node {
     private char lettera;
     private int key;
+    
     private Node left;
     private Node right;
 

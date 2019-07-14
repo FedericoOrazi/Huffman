@@ -12,11 +12,11 @@ public final class App {
         long startTime = System.currentTimeMillis();
         long endTime = System.currentTimeMillis();
         long duration = endTime - startTime;
-        System.out.println(duration);
+        System.out.println(duration); 
 
         int[] x = TextManipulator.getInstance().frequenzaLettereTesto();
-        Node huffmanRoot = Huffman.makeHuffmanHeap(x);   
-        Huffman.printHuffmanCode(huffmanRoot);
+        Node huffmanRoot = Huffman.makeHuffmanTree(x);   
+        Huffman.visitHuffmanTree(huffmanRoot);
         System.out.println(TextManipulator.getInstance().textLength() + " --> text lenght");
         System.out.println(TextManipulator.getInstance().originalSize()+ " --> original size with 16bit code");
         System.out.println(Huffman.compressedSize(TextManipulator.getInstance().frequenzaLettereTesto()) + " --> compressed size");

@@ -1,16 +1,16 @@
 package Huffman;
 
-public abstract class Huffman {
+public class Huffman {
     private static int[] huffman = new int[65536];
 
-    public static Node makeHuffmanHeap(int[] caratteri){
+    public static Node makeHuffmanTree(int[] frequenze){
         BinaryHeap.getInstance(); //crea un heap binario vuoto
         int n = 0;
-        for (int i = 0; i < caratteri.length; i++) {
-            if (caratteri[i] != 0) {
+        for (int i = 0; i < frequenze.length; i++) {
+            if (frequenze[i] != 0) {
                 Node x = new Node();
                 x.setChar((char)i);
-                x.setKey(caratteri[i]);
+                x.setKey(frequenze[i]);
                 BinaryHeap.getInstance().insert(x);
                 n++;
             }
@@ -29,9 +29,9 @@ public abstract class Huffman {
         return BinaryHeap.getInstance().extractMin();
     }
 
-    public static void printHuffmanCode(Node root){
+    public static void visitHuffmanTree(Node root){
         if(root == null) return ; 
-        print(root,"");
+        visit(root,"");
     }
     public static long compressedSize(int[] x){
         long sum = 0;
@@ -44,7 +44,7 @@ public abstract class Huffman {
         }
         return sum;
     }
-    private static void print(Node x, String h){
+    private static void visit(Node x, String h){
         if(x.left() == null && x.right() == null){
             System.out.print(x.getChar());
             System.out.print("-->");
@@ -52,10 +52,10 @@ public abstract class Huffman {
             huffman[(int)x.getChar()] = h.length();
         }
         if (x.left() != null) {
-            print(x.left(), h + "0");
+            visit(x.left(), h + "0");
         }
         if(x.right() != null) {
-            print(x.right(), h + "1"); 
+            visit(x.right(), h + "1"); 
         }
     }
 
