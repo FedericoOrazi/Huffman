@@ -30,6 +30,7 @@ public abstract class Huffman {
     }
 
     public static void printHuffmanCode(Node root){
+        if(root == null) return ; 
         print(root,"");
     }
     public static long compressedSize(int[] x){
