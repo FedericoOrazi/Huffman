@@ -28,10 +28,23 @@ public class Huffman {
         
         return BinaryHeap.getInstance().extractMin();
     }
-
     public static void visitHuffmanTree(Node root){
         if(root == null) return ; 
         visit(root,"");
+    }  
+    private static void visit(Node x, String h){
+        if(x.left() == null && x.right() == null){
+            //System.out.print(x.getChar());
+            //System.out.print("-->");
+            //System.out.println(h);
+            huffman[(int)x.getChar()] = h.length();
+        }
+        if (x.left() != null) {
+            visit(x.left(), h + "0");
+        }
+        if(x.right() != null) {
+            visit(x.right(), h + "1"); 
+        }
     }
     public static long compressedSize(int[] x){
         long sum = 0;
@@ -43,20 +56,6 @@ public class Huffman {
             }
         }
         return sum;
-    }
-    private static void visit(Node x, String h){
-        if(x.left() == null && x.right() == null){
-            System.out.print(x.getChar());
-            System.out.print("-->");
-            System.out.println(h);
-            huffman[(int)x.getChar()] = h.length();
-        }
-        if (x.left() != null) {
-            visit(x.left(), h + "0");
-        }
-        if(x.right() != null) {
-            visit(x.right(), h + "1"); 
-        }
     }
 
 }

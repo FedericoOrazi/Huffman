@@ -8,8 +8,8 @@ public class Node {
     private Node right;
 
     public Node(){
-    }
-    
+        
+    }    
     public int getKey(){
         return this.key;
     }
