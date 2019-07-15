@@ -39,7 +39,7 @@ public final class App {
         System.out.println(TextManipulator.getInstance().originalSize()+ " --> dimensione originale con codice a 16bit");
         System.out.println(Huffman.getInstance().compressedSize(TextManipulator.getInstance().frequenzaLettereTesto()) + " --> dimensione compressa");
         Huffman.getInstance().compressCode(TextManipulator.getInstance().getText());
-        System.out.println(TextManipulator.getInstance().readTextCompressed());
-        //System.out.println(Huffman.getInstance().translate(TextManipulator.getInstance().readTextCompressed()));
+        TextManipulator.getInstance().readTextCompressed();
+        Huffman.getInstance().translate(TextManipulator.getInstance().readTextCompressed());
     }
 }

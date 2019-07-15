@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.FileWriter;
-import java.io.BufferedWriter;
 
 public class TextManipulator {
     private static TextManipulator instance = null;

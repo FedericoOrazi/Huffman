@@ -77,6 +77,26 @@ public class Huffman {
         long end = System.currentTimeMillis();
         TextManipulator.getInstance().writeText(newString);
         System.out.println("testo scritto");
-        System.out.println(end-start + "--> tempo impiegato a tradurre");
+        System.out.println(end-start + "--> tempo impiegato a tradurre da testo originale a Huffman");
+    }
+    public String translate(String str){
+        long start = System.currentTimeMillis();
+        String ret = "";
+        Node x = this.root;
+        for (int i = 0; i < str.length(); i++) {
+            if(x.left()==null && x.right()==null){
+                ret = ret + x.getChar();
+                x = this.root;
+            }
+            if(x.left()!=null && str.charAt(i)=='0'){
+                x = x.left();
+            }
+            if(x.right()!=null && str.charAt(i)=='1'){
+                x = x.right();
+            }
+        }
+        long end = System.currentTimeMillis();
+        System.out.println(end-start + "-->tempo a tradurre da Huffman a Testo originale");
+        return ret;
     }
 }
