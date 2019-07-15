@@ -34,9 +34,9 @@ public class Huffman {
     }  
     private static void visit(Node x, String h){
         if(x.left() == null && x.right() == null){
-            //System.out.print(x.getChar());
-            //System.out.print("-->");
-            //System.out.println(h);
+            System.out.print(x.getChar());
+            System.out.print("-->");
+            System.out.println(h);
             huffman[(int)x.getChar()] = h.length();
         }
         if (x.left() != null) {
