@@ -5,12 +5,20 @@ public final class App {
     }
 
     public static void main(String[] args) {
-        System.out.println("Codice di Huffman calcolato:\n");
+        
         long startTime1 = System.currentTimeMillis();
         int[] x = TextManipulator.getInstance().frequenzaLettereTesto();
         long endTime1 = System.currentTimeMillis();
         long duration1 = endTime1 - startTime1;
         
+        for (int i = 0; i < x.length; i++) {
+            if (x[i] != 0) {
+                System.out.print("[" + (char)i + "-->");
+                System.out.println(x[i] + "]");
+            }
+        } 
+
+        System.out.println("\nCodice di Huffman calcolato:\n");
 
         long startTime2 = System.currentTimeMillis();
         Node huffmanRoot = Huffman.makeHuffmanTree(x);
