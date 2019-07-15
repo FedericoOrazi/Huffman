@@ -1,9 +1,17 @@
 package Huffman;
 
 public class Huffman {
-    private static int[] huffman = new int[65536];
+    private String[] huffman = new String[65536];
+    private static Huffman instance = null;
 
-    public static Node makeHuffmanTree(int[] frequenze){
+    private Huffman(){
+
+    }
+    public static Huffman getInstance(){
+        if(instance == null)instance = new Huffman();
+        return instance;
+    }
+    public Node makeHuffmanTree(int[] frequenze){
         BinaryHeap.getInstance(); //crea un heap binario vuoto
         int n = 0;
         for (int i = 0; i < frequenze.length; i++) {
@@ -28,16 +36,16 @@ public class Huffman {
         
         return BinaryHeap.getInstance().extractMin();
     }
-    public static void visitHuffmanTree(Node root){
+    public void visitHuffmanTree(Node root){
         if(root == null) return ; 
         visit(root,"");
     }  
-    private static void visit(Node x, String h){
+    private void visit(Node x, String h){
         if(x.left() == null && x.right() == null){
             System.out.print(x.getChar());
             System.out.print("-->");
             System.out.println(h);
-            huffman[(int)x.getChar()] = h.length();
+            huffman[(int)x.getChar()] = h;
         }
         if (x.left() != null) {
             visit(x.left(), h + "0");
@@ -46,16 +54,24 @@ public class Huffman {
             visit(x.right(), h + "1"); 
         }
     }
-    public static long compressedSize(int[] x){
+    public long compressedSize(int[] x){
         long sum = 0;
         for (int i = 0; i < x.length; i++) {
             if (x[i] != 0) {
-                int lunghezza = huffman[i];
+                int lunghezza = huffman[i].length();
                 int frequenza = x[i];
                 sum = sum + lunghezza * frequenza;
             }
         }
         return sum;
     }
-
+    public void compressCode(String str){
+        String newString = "";
+        System.out.println("attendere per scrittura del testo");
+        for (int i = 0; i < str.length(); i++) {
+            newString += huffman[(int)str.charAt(i)];
+        }
+        TextManipulator.getInstance().writeText(newString);
+        System.out.println("testo scritto");
+    }
 }

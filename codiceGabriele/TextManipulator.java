@@ -3,14 +3,17 @@ package Huffman;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 public class TextManipulator {
     private static TextManipulator instance = null;
     private int numberOfChar;
     private long textOriginalSize;
+    private String text;
 
     private TextManipulator() {
+        this.text = "";
         this.numberOfChar = 0;
         this.textOriginalSize = 0;
     }
@@ -24,13 +27,17 @@ public class TextManipulator {
         for (int i = 0; i < 65536; i++) {
             x[i]=0;
         }
-        String str = TextManipulator.getInstance().readText();
+        TextManipulator.getInstance().readText();
+        String str = TextManipulator.getInstance().getText();
         for (int i = 0; i < str.length(); i++) {
             x[(int)str.charAt(i)]++;
         }
         return x;
     }
     
+    public String getText(){
+        return this.text;
+    }
     public int textLength(){
         return this.numberOfChar;
     }
@@ -39,8 +46,8 @@ public class TextManipulator {
         return this.textOriginalSize;
     }
     
-    private String getFileFullPath() {
-        String fileName = this.getClass().getResource("testo.txt").toString();
+    private String getFileFullPath(String name) {
+        String fileName = this.getClass().getResource(name).toString();
         if (fileName.contains("//"))
             fileName = fileName.substring("file:/".length()); //Windows version
         else if (fileName.contains("/"))
@@ -49,9 +56,9 @@ public class TextManipulator {
         fileName = fileName.replaceAll("%20", " ");
         return fileName;
     }
-    private String readText(){
+    public void readText(){
         try {
-            FileInputStream in = new FileInputStream(getFileFullPath());
+            FileInputStream in = new FileInputStream(getFileFullPath("testo.txt"));
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             StringBuilder sb = new StringBuilder();
             String line;
@@ -61,11 +68,42 @@ public class TextManipulator {
             }
             br.close();
             this.numberOfChar = sb.toString().length();
-            return sb.toString();
+            this.text =  sb.toString();
         } catch (Exception e) {
             //TODO: handle exception
         }
+    }
+    public String readTextCompressed(){
+        try {
+            FileInputStream in = new FileInputStream(getFileFullPath("testoCodificato.txt"));
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+                sb.append("\n");
+            }
+            br.close();
+            return sb.toString();
+        } catch (Exception e) {
+            
+        }
         return null;
+    }
+    public void writeText(String str){
+        try {
+            FileWriter w;
+            w=new FileWriter("testoCodificato.txt");
+        
+            BufferedWriter b;
+            b=new BufferedWriter (w);
+        
+            b.write(str);
+        
+            b.flush();
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
     }
     
 }

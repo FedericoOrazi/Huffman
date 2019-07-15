@@ -21,13 +21,13 @@ public final class App {
         System.out.println("\nCodice di Huffman calcolato:\n");
 
         long startTime2 = System.currentTimeMillis();
-        Node huffmanRoot = Huffman.makeHuffmanTree(x);
+        Node huffmanRoot = Huffman.getInstance().makeHuffmanTree(x);
         long endTime2 = System.currentTimeMillis();
         long duration2 = endTime2 - startTime2;
         
         
         long startTime3 = System.currentTimeMillis();
-        Huffman.visitHuffmanTree(huffmanRoot);
+        Huffman.getInstance().visitHuffmanTree(huffmanRoot);
         long endTime3 = System.currentTimeMillis();
         long duration3 = endTime3 - startTime3;
         
@@ -37,6 +37,8 @@ public final class App {
         System.out.println(duration3 + " --> tempo per visitare l'albero di Huffman"); 
         System.out.println(TextManipulator.getInstance().textLength() + " --> lunghezza del testo");
         System.out.println(TextManipulator.getInstance().originalSize()+ " --> dimensione originale con codice a 16bit");
-        System.out.println(Huffman.compressedSize(TextManipulator.getInstance().frequenzaLettereTesto()) + " --> dimensione compressa");
+        System.out.println(Huffman.getInstance().compressedSize(TextManipulator.getInstance().frequenzaLettereTesto()) + " --> dimensione compressa");
+        Huffman.getInstance().compressCode(TextManipulator.getInstance().getText());
+        System.out.println(TextManipulator.getInstance().readTextCompressed());
     }
 }
