@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - App",
+            "request": "launch",
+            "mainClass": "Huffman.App",
+            "projectName": "gabriele"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Tesina",
+            "request": "launch",
+            "mainClass": "Tesina"
+        }
+    ]
+}
