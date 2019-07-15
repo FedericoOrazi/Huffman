@@ -3,6 +3,7 @@ package Huffman;
 public class Huffman {
     private String[] huffman = new String[65536];
     private static Huffman instance = null;
+    private Node root;
 
     private Huffman(){
 
@@ -34,7 +35,8 @@ public class Huffman {
         }
         
         
-        return BinaryHeap.getInstance().extractMin();
+        this.root = BinaryHeap.getInstance().extractMin();
+        return this.root;
     }
     public void visitHuffmanTree(Node root){
         if(root == null) return ; 
@@ -67,11 +69,14 @@ public class Huffman {
     }
     public void compressCode(String str){
         String newString = "";
+        long start = System.currentTimeMillis();
         System.out.println("attendere per scrittura del testo");
         for (int i = 0; i < str.length(); i++) {
             newString += huffman[(int)str.charAt(i)];
         }
+        long end = System.currentTimeMillis();
         TextManipulator.getInstance().writeText(newString);
         System.out.println("testo scritto");
+        System.out.println(end-start + "--> tempo impiegato a tradurre");
     }
 }
