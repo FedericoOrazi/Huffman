@@ -92,15 +92,14 @@ public class TextManipulator {
     }
     public void writeText(String str){
         try {
-            FileWriter w;
-            w=new FileWriter("testoCodificato.txt");
-        
-            BufferedWriter b;
-            b=new BufferedWriter (w);
-        
-            b.write(str);
-        
-            b.flush();
+            FileWriter w = new FileWriter(getFileFullPath("") + "testoCodificato.txt");
+            //FileWriter wr = new FileWriter("testoCodificato.txt");
+            //BufferedWriter b = new BufferedWriter(wr);
+            //b.write(str);
+            w.write(str);
+            //b.flush();
+            w.close();
+
         } catch (Exception e) {
             //TODO: handle exception
         }
